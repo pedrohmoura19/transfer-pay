@@ -8,13 +8,14 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import pedrohmoura.transferpay.domains.model.Transaction;
 import pedrohmoura.transferpay.domains.model.User;
 
 import java.math.BigDecimal;
 import java.util.UUID;
 
 @Entity
-@Table(name="transactions")
+@Table(name = "transactions")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -28,4 +29,12 @@ public class JpaTransactionEntity {
     private User from;
     private User destination;
     private String time;
+
+    public JpaTransactionEntity(Transaction transaction) {
+        this.id = transaction.getId();
+        this.amount = transaction.getAmount();
+        this.from = transaction.getFrom();
+        this.destination = transaction.getDestination();
+        this.time = transaction.getTime();
+    }
 }
