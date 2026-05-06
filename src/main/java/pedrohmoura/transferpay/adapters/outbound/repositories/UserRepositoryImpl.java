@@ -7,6 +7,9 @@ import pedrohmoura.transferpay.domains.repository.UserRepository;
 import java.util.Optional;
 import java.util.UUID;
 
+import org.springframework.stereotype.Repository;
+
+@Repository
 public class UserRepositoryImpl implements UserRepository {
 
     private final JpaUserRepository jpaUserRepository;
