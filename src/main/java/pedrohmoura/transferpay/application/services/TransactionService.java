@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import jakarta.transaction.Transactional;
 import pedrohmoura.transferpay.application.services.useCases.TransactionUseCases;
+import pedrohmoura.transferpay.domains.model.Role;
 import pedrohmoura.transferpay.domains.model.Transaction;
 import pedrohmoura.transferpay.domains.model.User;
 import pedrohmoura.transferpay.domains.repository.TransactionRepository;
@@ -28,7 +29,11 @@ public class TransactionService implements TransactionUseCases {
         if(sender.getBalance().compareTo(amount) == -1) {
             throw new IllegalArgumentException("Saldo insuficiente");
         }
-        
+
+        if(sender.getRole().equals(Role.MERCHANT)) {
+            throw new IllegalArgumentException("Lojistas não podem enviar dinheiro");
+        }
+
         userService.updateUserBalance(senderId, sender.getBalance().subtract(amount));       
         userService.updateUserBalance(receiverId, receiver.getBalance().add(amount));
 

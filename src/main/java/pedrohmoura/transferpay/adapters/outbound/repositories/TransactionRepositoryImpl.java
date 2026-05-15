@@ -23,19 +23,19 @@ public class TransactionRepositoryImpl implements TransactionRepository {
     public Transaction save(Transaction transaction) {
         JpaTransactionEntity transactionEntity = new JpaTransactionEntity(transaction);
         this.jpaTransactionRepository.save(transactionEntity);
-        return new Transaction(transactionEntity.getId(), transactionEntity.getAmount(), transactionEntity.getFrom(), transactionEntity.getDestination(), transactionEntity.getTime());
+        return new Transaction(transactionEntity.getId(), transactionEntity.getAmount(), transactionEntity.getPayer(), transactionEntity.getPayee(), transactionEntity.getCreatedAt());
     }
 
     @Override
     public Transaction findById(UUID id) {
         Optional<JpaTransactionEntity> transactionEntity = this.jpaTransactionRepository.findById(id);
-        return transactionEntity.map(entity -> new Transaction(entity.getId(), entity.getAmount(), entity.getFrom(), entity.getDestination(), entity.getTime())).orElse(null);
+        return transactionEntity.map(entity -> new Transaction(entity.getId(), entity.getAmount(), entity.getPayer(), entity.getPayee(), entity.getCreatedAt())).orElse(null);
     }
 
     @Override
     public List<Transaction> findAll() {
         return this.jpaTransactionRepository.findAll().stream()
-                .map(entity -> new Transaction(entity.getId(), entity.getAmount(), entity.getFrom(), entity.getDestination(), entity.getTime()))
+                .map(entity -> new Transaction(entity.getId(), entity.getAmount(), entity.getPayer(), entity.getPayee(), entity.getCreatedAt()))
                 .collect(java.util.stream.Collectors.toList());
     }
 }

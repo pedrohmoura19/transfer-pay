@@ -6,23 +6,23 @@ import java.util.UUID;
 public class Transaction {
     private UUID id;
     private BigDecimal amount;
-    private User from;
-    private User destination;
-    private String time;
+    private UUID payer;
+    private UUID payee;
+    private String createdAt;
 
-    private Transaction() {
+    public Transaction() {
     }
 
     public Transaction(UUID id,
                        BigDecimal amount,
-                       User from,
-                       User destination,
-                       String time) {
+                       UUID payer,
+                       UUID payee,
+                       String createdAt) {
         this.id = id;
         this.amount = amount;
-        this.from = from;
-        this.destination = destination;
-        this.time = time;
+        this.payer = payer;
+        this.payee = payee;
+        this.createdAt = createdAt;
     }
 
     public UUID getId() {
@@ -41,27 +41,27 @@ public class Transaction {
         this.amount = amount;
     }
 
-    public User getFrom() {
-        return from;
+    public UUID getPayer() {
+        return payer;
     }
 
-    public void setFrom(User from) {
-        this.from = from;
+    public void setPayer(UUID payer) {
+        this.payer = payer;
     }
 
-    public User getDestination() {
-        return destination;
+    public UUID getPayee() {
+        return payee;
     }
 
-    public void setDestination(User destination) {
-        this.destination = destination;
+    public void setPayee(UUID payee) {
+        this.payee = payee;
     }
 
-    public String getTime() {
-        return time;
+    public String getCreatedAt() {
+        return createdAt;
     }
 
-    public void setTime(String time) {
-        this.time = time;
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
     }
 }

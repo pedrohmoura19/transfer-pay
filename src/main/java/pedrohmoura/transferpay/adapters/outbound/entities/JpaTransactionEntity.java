@@ -9,7 +9,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import pedrohmoura.transferpay.domains.model.Transaction;
-import pedrohmoura.transferpay.domains.model.User;
 
 import java.math.BigDecimal;
 import java.util.UUID;
@@ -26,15 +25,16 @@ public class JpaTransactionEntity {
     private UUID id;
 
     private BigDecimal amount;
-    private User from;
-    private User destination;
-    private String time;
+    private UUID payer;
+    private UUID payee;
+    @jakarta.persistence.Column(name = "created_at")
+    private String createdAt;
 
     public JpaTransactionEntity(Transaction transaction) {
         this.id = transaction.getId();
         this.amount = transaction.getAmount();
-        this.from = transaction.getFrom();
-        this.destination = transaction.getDestination();
-        this.time = transaction.getTime();
+        this.payer = transaction.getPayer();
+        this.payee = transaction.getPayee();
+        this.createdAt = transaction.getCreatedAt();
     }
 }
