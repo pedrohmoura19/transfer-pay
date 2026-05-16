@@ -3,14 +3,21 @@ package pedrohmoura.transferpay.application.services;
 import java.math.BigDecimal;
 import java.util.UUID;
 
+import org.springframework.stereotype.Service;
+
 import pedrohmoura.transferpay.application.services.useCases.UserUseCases;
 import pedrohmoura.transferpay.domains.dto.UserDTO;
 import pedrohmoura.transferpay.domains.model.User;
 import pedrohmoura.transferpay.domains.repository.UserRepository;
 
+@Service
 public class UserService implements UserUseCases {
 
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
+
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     @Override
     public User createUser(UserDTO data) {
