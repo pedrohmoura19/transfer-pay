@@ -1,5 +1,6 @@
 package pedrohmoura.transferpay.adapters.inbound.controller;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.http.ResponseEntity;
@@ -37,5 +38,18 @@ public class UserController {
     public ResponseEntity<User> getUser(@PathVariable UUID id) {
         User user = userService.getUserById(id);
         return ResponseEntity.ok(user);
+    }
+
+    @Operation(summary = "Get user by CPF")
+    @GetMapping("/cpf/{cpf}")
+    public ResponseEntity<User> getUserByCpf(@PathVariable String cpf) {
+        User user = userService.getUserByCpf(cpf);
+        return ResponseEntity.ok(user);
+    }
+
+    @Operation(summary = "Get all users")
+    @GetMapping
+    public ResponseEntity<List<User>> getAllUsers() {
+        return ResponseEntity.ok(userService.getAllUsers());    
     }
 }

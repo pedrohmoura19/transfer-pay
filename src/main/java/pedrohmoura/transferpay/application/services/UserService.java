@@ -1,6 +1,7 @@
 package pedrohmoura.transferpay.application.services;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.stereotype.Service;
@@ -35,6 +36,16 @@ public class UserService implements UserUseCases {
     @Override
     public User getUserById(UUID userId) {
         return userRepository.findById(userId);
+    }
+
+    @Override
+    public User getUserByCpf(String cpf) {
+        return userRepository.findByCpf(cpf);
+    }
+
+    @Override
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
     }
 
     @Override
