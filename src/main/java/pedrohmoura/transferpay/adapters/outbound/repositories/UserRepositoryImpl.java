@@ -4,6 +4,7 @@ import pedrohmoura.transferpay.adapters.outbound.entities.JpaUserEntity;
 import pedrohmoura.transferpay.domains.model.User;
 import pedrohmoura.transferpay.domains.repository.UserRepository;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -43,5 +44,17 @@ public class UserRepositoryImpl implements UserRepository {
         return this.jpaUserRepository.findAll().stream()
                 .map(userEntity -> new User(userEntity.getId(), userEntity.getName(), userEntity.getCpf(), userEntity.getEmail(), userEntity.getPassword(), userEntity.getBalance(), userEntity.getRole()))
                 .toList();
+    }
+
+    @Override
+    public User updateUserBalance(UUID userId, BigDecimal newBalance) {
+        Optional<JpaUserEntity> userEntityOptional = this.jpaUserRepository.findById(userId);
+        if (userEntityOptional.isPresent()) {
+            JpaUserEntity userEntity = userEntityOptional.get();
+            userEntity.setBalance(newBalance);
+            this.jpaUserRepository.save(userEntity);
+            return new User(userEntity.getId(), userEntity.getName(), userEntity.getCpf(), userEntity.getEmail(), userEntity.getPassword(), userEntity.getBalance(), userEntity.getRole());
+        }
+        return null;
     }
 }

@@ -2,6 +2,7 @@ package pedrohmoura.transferpay.domains.repository;
 
 import pedrohmoura.transferpay.domains.model.User;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
 
@@ -13,4 +14,6 @@ public interface UserRepository {
     User findByCpf(String cpf);
 
     List<User> findAll();
+
+    User updateUserBalance(UUID userId, BigDecimal newBalance);
 }
